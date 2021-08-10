@@ -1,0 +1,39 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr class="none-shadow">
+      <th></th>
+      <th scope="col">Expert Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">City</th>
+      <th scope="col">Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of user; index as x">
+      <td>
+          <img [src]="'assets/imgs/' + i.id + '.jpg'">
+      </td>
+      <td>
+        {{ i.name }}
+      </td>
+      <td>
+          {{ i.email }}
+      </td>
+      <td>
+          {{i.address.city}}
+      </td>
+      <td>
+            <span class="material-icons show-posts"
+            matTooltip="Show Posts"
+            matTooltipClass="example-tooltip-red"
+            aria-label="Button that shows a red tooltip"
+            [routerLink]="['/user-posts', i.id]"
+            >
+                visibility
+            </span>
+      </td>
+    </tr>
+    </tbody>
+  </table>  
+</div>

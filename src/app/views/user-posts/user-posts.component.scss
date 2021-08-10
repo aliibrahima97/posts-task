@@ -1,0 +1,72 @@
+.row {
+    justify-content: center;
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.card-body img {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
+.center {
+    display: flex;
+    justify-content: center;
+}
+.stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.stats button {
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    width: 135px;
+    color: white;
+    background: rgb(0,212,255);
+    background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(28,151,233,1) 35%, rgba(28,151,233,1) 100%);
+    font-weight: 500;
+}
+.stats p {
+    font-weight: 500;
+    position: relative;
+    left: 5%;
+}
+.stats p span {
+    font-weight: bold;
+}
+.show-posts {
+	display: none;
+    background: #80808075;
+    padding: 6px;
+    border-radius: 25px;
+    position: absolute;
+    cursor: pointer;
+}
+.alert {
+    position: fixed;
+    top: 0px;
+    left: 43%;
+    z-index: 9999;
+}
+.opt {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.opt span {
+    padding: 5px;
+    cursor: pointer;
+}
+.opt span:hover {
+    background: #80808075;
+    padding: 6px;
+    border-radius: 25px;
+    color: white;
+}

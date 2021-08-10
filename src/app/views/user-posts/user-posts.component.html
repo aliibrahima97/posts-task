@@ -1,0 +1,123 @@
+<app-header></app-header>
+<div class="container">
+    <div class="stats">
+        <p><span>{{total}}</span> Posts</p>
+        <!-- add new post -->
+        <button (click)="openAdd(content)">Add New Post</button>
+        <!-- add new post end-->
+    </div>
+    <div class="row">
+      <!-- post card -->
+        <div class="col-md-4" *ngFor="let i of post | paginate: { itemsPerPage: 10, currentPage: p, totalItems:total };">
+            <div class="card m-3">
+                <div class="card-body">
+                  <img [src]="avatar" alt="user-img">
+                  <h4 class="card-title"> <strong>Title: </strong> {{ i.title | uppercase}}</h4>
+                  <p>{{ i.body }}</p>
+                </div>
+                <!-- operations  -->
+                <div class="opt">
+                    <span class="material-icons"
+                    matTooltip="Delete Post"
+                    matTooltipClass="example-tooltip-red"
+                    aria-label="Button that shows a red tooltip"
+                    (click)="deletePost(i.id!)"
+                    >
+                      delete
+                    </span>
+                    <span class="material-icons"
+                    matTooltip="Update Post"
+                    matTooltipClass="example-tooltip-red"
+                    aria-label="Button that shows a red tooltip"
+                    (click)="openEdit(content2,i.id!,i.title!,i.body!)"
+                    >
+                      edit
+                    </span>
+                </div>
+                <!-- operations end-->
+            </div>
+        </div>
+        <!-- post card end-->
+    </div>
+    <!-- paginiation -->
+    <div class="center">
+        <pagination-controls 
+        (pageChange)="p = $event"
+        previousLabel="previous"
+        nextLabel="next"
+        ></pagination-controls>
+    </div>
+    <!-- paginiation end-->
+</div>
+
+<!-- add new post modal -->
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Post</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="addNew(f)">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" id="title" placeholder="Title" ngModel name='title' #title="ngModel" required>
+            </div>
+            <div class="form-group">
+              <label for="body">Subject</label>
+              <textarea  class="form-control" ngModel name='body' #body="ngModel" required placeholder="subject"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit</button>
+          </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">close</button>
+    </div>
+  </ng-template>
+<!-- add new post modal end-->
+
+<!-- edit post modal -->
+  <ng-template #content2 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Post</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" id="title" placeholder="Title" [(ngModel)]="title" [ngModelOptions]="{standalone: true}" (focus)="showSubmit()">
+            </div>
+            <div class="form-group">
+              <label for="body">Subject</label>
+              <textarea  class="form-control" placeholder="subject" [(ngModel)]="body" [ngModelOptions]="{standalone: true}" (focus)="showSubmit()"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="submit == false" (click)="editPost()">Submit</button>
+          </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">close</button>
+    </div>
+  </ng-template>
+<!-- edit post modal end-->
+
+<!-- success posting alert -->
+  <div class="alert alert-success" role="alert" *ngIf="done == true">
+    Success Posting!
+  </div>
+<!-- succes posting alert end-->
+
+<!-- success Deleting alert -->
+  <div class="alert alert-success" role="alert" *ngIf="deleted == true">
+    Success Deleting!
+  </div>
+<!-- success Deleting alert end-->
+
+<!-- success editing alert -->
+  <div class="alert alert-success" role="alert" *ngIf="edited == true">
+    Success Editing!
+  </div>
+<!-- success editing alert end-->
